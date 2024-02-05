@@ -13,7 +13,7 @@ allprojects {
 
   java {
     toolchain {
-      languageVersion = JavaLanguageVersion.of(11) 
+      languageVersion = JavaLanguageVersion.of(17) 
     }
   }
 
@@ -28,5 +28,6 @@ allprojects {
 }
 
 dependencies {
-  // add dependencies
+   implementation project(':modules:axelor-contact')
+   implementation project(':modules:axelor-sale')
 }

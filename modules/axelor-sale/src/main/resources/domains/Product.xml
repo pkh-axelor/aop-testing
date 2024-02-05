@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models
+	xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+  https://axelor.com/xml/ns/domain-models/domain-models_6.0.xsd">
+
+	<module name="sale" package="com.axelor.sale.db" />
+
+	<entity name="Product">
+		<date name="dob"  />
+		<string name="name" required="true" />
+		<decimal name="price" />
+		<decimal name="quantity" required="true"/>
+	</entity>
+
+</domain-models>
