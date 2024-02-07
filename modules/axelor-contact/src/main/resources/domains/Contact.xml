@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models
+	xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+  https://axelor.com/xml/ns/domain-models/domain-models_6.0.xsd">
+
+	<module name="contact" package="com.axelor.contact.db" />
+
+	<entity name="Contact">
+		<many-to-one name="title"  ref="Title" title="Title" required="true"/>
+		<string name="firstName" title="First name" required="true"/>
+		<string name="lastName" title="Last name" required="true"/>
+		<string name="fullName" title="Full name" required="true"> 
+		 	<![CDATA[
+    if (title == null || firstName == null || lastName == null) {
+        return null;
+    }
+    else {
+        return title.getCode() + " " + firstName + " " + lastName;
+    }
+    
+    ]]> </string>
+    <date name="birthDate" title="Date of birth" />
+    <string name="email" title="Email"/>
+    <string name="phone" title="Phone number"/>
+    <binary name="image" title="Profile picture"/>
+    <boolean name="isSubjectToTaxes" title="Apply taxes" required="false" default="false"/>
+    <many-to-one ref="Address" name="address" title="Address"/>
+    <many-to-many ref="Contact" name="familyContactSet" title="Family members"/>
+	</entity>
+</domain-models>

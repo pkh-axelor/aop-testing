@@ -6,3 +6,7 @@ axelor {
   title = 'Axelor Sale'
 }
 
+dependencies {
+	implementation project(':modules:axelor-contact')
+}
+
