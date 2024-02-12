@@ -11,7 +11,7 @@
 		<many-to-one name="title"  ref="Title" title="Title" required="true"/>
 		<string name="firstName" title="First name" required="true"/>
 		<string name="lastName" title="Last name" required="true"/>
-		<string name="fullName" title="Full name" required="true"> 
+		<string name="fullName" title="Full name"> 
 		 	<![CDATA[
     if (title == null || firstName == null || lastName == null) {
         return null;

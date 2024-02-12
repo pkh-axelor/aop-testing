@@ -8,9 +8,13 @@
 	<module name="contact" package="com.axelor.contact.db" />
 
 	<entity name="Address">
-		<string name="fullname" title="Name" required="true" namecolumn="true">
-       	<![CDATA[
-    if (numberAndStreet == null || zip == null || city == null) {
+	<string name="numberAndStreet" title="N° / Street" required="true" />
+	<string name="zip" title="Zip" required="true" />
+	<string name="city" required="true" />
+	<many-to-one ref="Country" name="country" required="true" />
+	<string name="fullName" title="Name" namecolumn="true">
+	<![CDATA[
+    if (numberAndStreet == null || zip == null || city == null) {	
         return null;
     }
     else {
@@ -18,12 +22,8 @@
     }
     
     ]]>
-		</string>
-		<string name="numberAndStreet" title="N° / Street" required="true" />
-		<string name="zip" title="Zip" required="true" />
-		<string name="city" required="true" />
-		<many-to-many ref="Country" name="country" required="true" />
+    </string>
+		
 	</entity>
-
 </domain-models>
 	

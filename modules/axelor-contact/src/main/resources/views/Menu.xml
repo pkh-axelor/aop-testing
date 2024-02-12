@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  https://axelor.com/xml/ns/object-views/object-views_6.0.xsd">
+
+	<menuitem title="Contact" name="contact-root" icon="fa-user"
+		icon-background="#05a49c" />
+
+	<menuitem title="Contacts" 
+		name="contact-root-contacts"
+		parent="contact-root" 
+		action="action-contact-contacts" />
+		<action-view name="action-contact-contacts"
+			title="Contacts" 
+			model="com.axelor.contact.db.Contact">
+			<view type="grid" name="contact-grid" />
+			<view type="form" name="contact-form" />
+			<view-param name="showArchived" value="true" />
+		</action-view>
+
+	<menuitem title="Events" 
+		name="contact-root-events"
+		parent="contact-root" 
+		action="action-contact-events" />
+		<action-view name="action-contact-events" 
+			title="Events"
+			model="com.axelor.contact.db.Event">
+			<view type="grid" name="event-grid" />
+			<view type="form" name="event-form" />
+		</action-view>
+
+	<menuitem title="Configuration"
+		name="contact-root-configuration" 
+		parent="contact-root" 
+		icon="fa-gear" />
+
+	<menuitem title="Titles"
+		name="contact-root-configuration-titles"
+		parent="contact-root-configuration"
+		action="action-contact-configuration-titles" />
+		<action-view name="action-contact-configuration-titles"
+			title="Titles" 
+			model="com.axelor.contact.db.Title">
+			<view type="grid" name="title-grid" />
+			<view type="form" name="title-form" />
+		</action-view>
+
+	<menuitem title="Countries"
+		name="contact-root-configuration-countries"
+		parent="contact-root-configuration"
+		action="action-contact-configuration-countries" />
+		<action-view name="action-contact-configuration-countries"
+			title="Countries" 
+			model="com.axelor.contact.db.Country">
+			<view type="grid" name="country-grid" />
+			<view type="form" name="country-form" />
+		</action-view>
+
+	<menuitem title="Addresses"
+		name="contact-root-configuration-addresses"
+		parent="contact-root-configuration"
+		action="action-contact-configuration-addresses" />
+		<action-view name="action-contact-configuration-addresses"
+			title="Addresses" model="com.axelor.contact.db.Address">
+			<view type="grid" name="address-grid" />
+			<view type="form" name="address-form" />
+		</action-view>
+</object-views>

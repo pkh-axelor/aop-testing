@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<domain-models
+	xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+  https://axelor.com/xml/ns/domain-models/domain-models_6.0.xsd">
+
+	<module name="contact" package="com.axelor.contact.db" />
+	
+	<entity name="Event">
+		<string name="title" title="Title" required="true" 	namecolumn="true"/>
+		<datetime name="startDate" title="Start date" required="true" />
+		<datetime name="endDate" title="End date" required="true"/>
+		<integer name="statusSelect" title="Status" selection="contact.event.status.select" required="true" />
+		<integer name="typeSelect" title="Type" selection="contact.event.type.select" required="true"/>
+		<string name="notes" title="Notes" large="true"/>
+		<many-to-one ref="Contact" name="plannedFor" title="Planned for" required="true"/>
+		
+	</entity>
+</domain-models>		

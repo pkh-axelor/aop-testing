@@ -8,7 +8,7 @@
 
 <enum name="SaleOrderStatusSelect">
 	<item name="DRAFT" value="draft"/>
-	<item name="QUOTTATION" value="quotation"/>
+	<item name="QUOTATION" value="quotation"/>
 	<item name="CONFIRMED" value="confirmed"/>
 	<item name="CANCELLED" value="cancelled"/>
 </enum>
@@ -28,7 +28,7 @@
  	<datetime name="confirmationDateT" title="Confirmation date"/>
 	<enum name="statusSelect" ref="SaleOrderStatusSelect" title="Status" required="true" />
 	<decimal name="inTaxTotal" title="Total with tax" default="0"/>
-	<many-to-one ref="SaleOrder" name="customer" title="Customer" required="true" />
+	<many-to-one ref="com.axelor.contact.db.Contact" name="customer" title="Customer" required="true" />
 	<one-to-many ref="SaleOrderLine" name="saleOrderLineList" title="Sale order lines"/> 	
 </entity>  
 </domain-models>
