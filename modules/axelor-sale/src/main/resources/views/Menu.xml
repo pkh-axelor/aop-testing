@@ -95,7 +95,7 @@
 			<view-param name="search-filter" value="searchFilters" />
 			<domain>self.saleOrder.customer = :value</domain>
 	        <context name="value" expr="eval:__self__" /> 
-		</action-view>
+		</action-view>	
 		
 		<search-filters name="searchFilters"
 			model="com.axelor.sale.db.SaleOrderLine" 

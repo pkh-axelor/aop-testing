@@ -26,12 +26,11 @@
 				public static final int STATUS_POSTPONED = 5;
 				public static final int STATUS_REFUSED = 6;
 				public static final int STATUS_CANCELLED = 7;
-				public static final int TYPE_OTHER = 0; 
+				public static final int TYPE_OTHER = 0;
 				public static final int TYPE_PHONE_CALL = 1;
 				public static final int TYPE_MEETING = 2;
 			]]>
 		</extra-code>
 	</entity>
-	
 	
 </domain-models>		

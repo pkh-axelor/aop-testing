@@ -13,23 +13,24 @@
   		<field name="isSubjectToTaxes" />
   		<field name="address" />
   		<field name="archived" />
+  		<button onClick="action-customer-sale-order-line" name="saleOrderLineList" title="customer-sale-order" icon="fa-print"/>
   	</grid>
   	
   	<form model="com.axelor.contact.db.Contact" title="Contact" name="contact-form" width="large">
-  		<panel name="contactPanel" title="Profile" >
+  		<panel title="Profile" name="profilePanel">
   			<panel colSpan="4"> 
   				<field name="image" widget="image" />
   			</panel>
-  			<panel colSpan="8">
+  			<panel colSpan="8" >
   				<field name="firstName"/>
   				<field name="lastName" />
   				<field name="title" />
-  				<field name="birthDate" />
+  				<field name="birthDate" onChange="action-customer-birth-date-condition"/>
   			</panel>
   		</panel>
   		
   		<panel-tabs >
-  			<panel name="Contact" title="Contact">
+  			<panel name="contact" title="Contact">
   				<field name="email" colSpan="3"/>
   				<field name="phone" colSpan="3" widget="phone"/>
   				<field name="address"/>
@@ -39,10 +40,11 @@
   				<field name="isSubjectToTaxes" widget="boolean-switch"/>
   				<field name="familyContactSet" widget="TagSelect"/>
   			</panel>
+
   		</panel-tabs>
   		
-  		<panel-dashlet name="saleOrderLinePanel" action="action.sale.order.line.customer" title="Related sale order details"/>
-  		
+		<panel-dashlet name="saleOrderLinePanel" action="action.sale.order.line.customer" title="Related sale order details"/>
+		
   		<panel-mail name="fullName">
   			<mail-messages limit="5" />
   			<mail-followers />
@@ -50,11 +52,11 @@
   	</form>
   	<cards name="contact-card" model="com.axelor.contact.db.Contact" title="Card view">
   		<field name="fullName" />
-		<field name="phone" />
-		<field name="email" />
-		<field name="address" />
-		<field name="image" />
-		<template ><![CDATA[
+		  <field name="phone" />
+		  <field name="email" />
+		  <field name="address" />
+		  <field name="image" />
+		  <template><![CDATA[
 		  <div class="span5 card-image">
 		    <strong>{{fullName}}</strong>
 		    <br>
@@ -62,14 +64,24 @@
 		  </div>
 		  <div class="span7">
 		    <br><br>
-		     	<i ng-if="email" class="fa fa-at" ></i><a href="mailto:{{email}}">{{email}}</a><br>
+				<i ng-if="email" class="fa fa-at" ></i><a href="mailto:{{email}}">{{email}}</a><br>
 				<i ng-if="phone" class="fa fa-phone" ></i><a href="phone:{{phone}}">{{phone}}</a><br>
 		      	<i ng-if="address" class="fa fa-envelope" ></i>{{address.fullName}}<br>
 		  </div>
 		  ]]></template>
   	</cards>
   	
+	  	
+  	<action-view name="action-customer-sale-order-line" title="customer-sale-order" model="com.axelor.sale.db.SaleOrderLine">
+        <view type="grid" name="sale-order-line-grid-from-menu" />
+  		<view-param name="popup" value="true"/>
+  		<view-param name="limit" value="20"/>
+  		<domain>self.saleOrder.customer =: cusSale</domain>
+  		<context name="cusSale" expr="eval:__self__"/>
+  	</action-view> 
   	
-  	
+  	<action-condition name="action-customer-birth-date-condition">
+  		<check field="birthDate" if="birthDate &lt; LocalDate.of(1930, 1, 1)" error="should be &gt; 1930" />
+  	</action-condition>
   	
 </object-views>

@@ -13,7 +13,7 @@
   	</grid>
 	
 	<form model="com.axelor.sale.db.ProductCategory" title="Product category" name="product-category-form" width="large">
-		<panel name="productCategoryPanel" title="mainPanel">
+		<panel title="mainPanel">
 			<field name="iconSelect" widget="ImageSelect"/>
 			<field name="name" />
 			<field name="code" />
@@ -32,10 +32,15 @@
 			<field name="code"/>
 		</node>
 		
-		<node model="com.axelor.sale.db.Product" parent="productCategory">
+		<node model="com.axelor.sale.db.Product" parent="productCategory" onClick="action-product-catagory-view-product">
 			<field name="name"/>
 			<field name="code"/>
 		</node>
 	</tree>
+	
+	<action-view name="action-product-catagory-view-product" title="Product" model="com.axelor.sale.db.Product">
+		<view type="form" name="product-form"/>
+		<context name="_showRecord" expr="eval:id"/>
+	</action-view>
 	
 </object-views>
