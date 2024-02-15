@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
-  https://axelor.com/xml/ns/object-views/object-views_6.0.xsd">
-
-	<selection name="sale.sale.order.type.select">
-		<option value="1">Prestation</option>
-		<option value="2">Product</option>
+  	https://axelor.com/xml/ns/object-views/object-views_6.0.xsd">
+  	
+  	
+	<selection name="sale.product.icon.type.select">
+		<option value="0" icon="img/productCategory/service.png">Prestation</option>
+		<option value="1" icon="img/productCategory/storable.png">Product</option>
 	</selection>
 	
-</object-views>	
+</object-views>

@@ -14,14 +14,14 @@
 		<![CDATA[
 			if(	name == null || code == null)
 			{
-				return null;
+				return "";
 			}else {
 				return "[" + code + "]" + name;
 			}
 		]]>
 		</string>
 		<decimal name="unitPriceUntaxed" title="Unit price untaxed" required="true" min	="0" />
-		<many-to-one ref="ProductCategory" name="productCategory" title="Product category" required="true"></many-to-one>
+		<many-to-one ref="com.axelor.sale.db.ProductCategory" name="productCategory" title="Product category" required="true"></many-to-one>
 		<binary name="image" title="Image"/>
 	</entity>
 

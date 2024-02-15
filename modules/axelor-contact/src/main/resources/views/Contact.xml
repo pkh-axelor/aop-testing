@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  	https://axelor.com/xml/ns/object-views/object-views_6.0.xsd">
+  	
+  	<grid model="com.axelor.contact.db.Contact" title="Contacts" name="contact-grid">
+  		<field name="fullName" />
+  		<field name="birthDate" />
+  		<field name="email" />
+  		<field name="phone" />
+  		<field name="isSubjectToTaxes" />
+  		<field name="address" />
+  		<field name="archived" />
+  	</grid>
+  	
+  	<form model="com.axelor.contact.db.Contact" title="Contact" name="contact-form" width="large">
+  		<panel name="contactPanel" title="Profile" >
+  			<panel colSpan="4"> 
+  				<field name="image" widget="image" />
+  			</panel>
+  			<panel colSpan="8">
+  				<field name="firstName"/>
+  				<field name="lastName" />
+  				<field name="title" />
+  				<field name="birthDate" />
+  			</panel>
+  		</panel>
+  		
+  		<panel-tabs >
+  			<panel name="Contact" title="Contact">
+  				<field name="email" colSpan="3"/>
+  				<field name="phone" colSpan="3" widget="phone"/>
+  				<field name="address"/>
+  			</panel>
+  			
+  			<panel name="otherInformationPanel" title="Other informations">
+  				<field name="isSubjectToTaxes" widget="boolean-switch"/>
+  				<field name="familyContactSet" widget="TagSelect"/>
+  			</panel>
+  		</panel-tabs>
+  		
+  		<panel-dashlet name="saleOrderLinePanel" action="action.sale.order.line.customer" title="Related sale order details"/>
+  		
+  		<panel-mail name="fullName">
+  			<mail-messages limit="5" />
+  			<mail-followers />
+  		</panel-mail>
+  	</form>
+  	<cards name="contact-card" model="com.axelor.contact.db.Contact" title="Card view">
+  		<field name="fullName" />
+		<field name="phone" />
+		<field name="email" />
+		<field name="address" />
+		<field name="image" />
+		<template ><![CDATA[
+		  <div class="span5 card-image">
+		    <strong>{{fullName}}</strong>
+		    <br>
+		    <img ng-src="{{$image(null, 'image')}}">
+		  </div>
+		  <div class="span7">
+		    <br><br>
+		     	<i ng-if="email" class="fa fa-at" ></i><a href="mailto:{{email}}">{{email}}</a><br>
+				<i ng-if="phone" class="fa fa-phone" ></i><a href="phone:{{phone}}">{{phone}}</a><br>
+		      	<i ng-if="address" class="fa fa-envelope" ></i>{{address.fullName}}<br>
+		  </div>
+		  ]]></template>
+  	</cards>
+  	
+  	
+  	
+  	
+</object-views>

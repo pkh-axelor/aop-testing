@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  https://axelor.com/xml/ns/object-views/object-views_6.0.xsd">
+
+	<grid model="com.axelor.contact.db.Event" title="Events" name="event-grid">
+		<field name="title" />
+		<field name="typeSelect" />
+		<field name="startDate" />
+		<field name="endDate" />
+		<field name="statusSelect" />
+	</grid>
+  
+  	<form model="com.axelor.contact.db.Event" title="Event" name="event-form" width="large">
+  		<panel name="eventPanel" title="mainPanel" itemSpan="4">
+  			<field name="title" />
+  			<field name="statusSelect" widget="singleSelect"/>
+  			<field name="typeSelect" />
+  			<field name="plannedFor" />
+  			<field name="startDate" />
+  			<field name="endDate" />
+  			<field name="notes" colSpan="12"/>
+  		</panel>
+  	</form>
+  
+  	
+  	<kanban columnBy="statusSelect" model="com.axelor.contact.db.Event" sequenceBy="typeSelect" title="Kanban view" name="event-kanban">
+  		<field name="title"/>
+  		<field name="typeSelect"/>
+  		<field name="plannedFor.fullName"/>
+  		<field name="plannedFor.email"/>
+  		<field name="plannedFor.phone"/>
+  		<field name="startDate"/>
+  		<field name="endDate"/>
+  		<template>
+  			<![CDATA[
+				<strong> {{title}} </strong>
+				<div class="card-header"> 
+					<span class="label {{typeSelect == 1 ? 'label-success' : typeSelect == 2 ? 'label-warning' : 'label-secondary'}}">
+                  	{{typeSelect == 0 ? 'Other' : typeSelect == 1 ? 'Phone' : 'Meeting'}}</span><br>
+				</div>
+				
+				<div class="card-body">
+				</br>
+					<strong>{{plannedFor.fullName}}</strong>
+					<br/>
+					<strong><i ng-if="phone" class="fa fa-phone" /><a href="phone:{{phone}}">{{ plannedFor.phone}}</a></strong>
+					<br/>
+					<strong><i ng-if="email" class="fa fa-at" /><a href="mailto:{{email}}">{{ plannedFor.email}}</a></strong>
+					</br>
+					</br>
+					</br>
+				</div>
+				
+				<div class="card-footer">
+					<span>{{startDate|date:'YYYY-MM-DD HH:mm:ss'}}</span>
+					</br>
+					<span>{{endDate|date:'YYYY-MM-DD HH:mm:ss'}}</span>
+				</div>
+  			]]>
+  		</template>	
+  	</kanban>
+  
+  	<calendar name="event-calender"
+	  title="Events"
+	  model="com.axelor.contact.db.Event"
+	  colorBy="typeSelect"
+	  eventStart="startDate"
+	  eventStop="endDate"
+	  eventLength="2">
+	  <field name="title" />
+	</calendar>
+  
+ </object-views>

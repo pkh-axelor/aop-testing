@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  https://axelor.com/xml/ns/object-views/object-views_6.0.xsd">
+  
+	<grid model="com.axelor.sale.db.SaleOrderLine" title="Sale order line" name="sale-order-line-grid">
+		<field name="description" />
+		<field name="quantity" />
+		<field name="taxRate" />
+		<field name="exTaxTotal" />
+	</grid> 
+	
+	<grid model="com.axelor.sale.db.SaleOrderLine" title="Sale order line" name="sale-order-line-grid-from-menu" canNew="false" canEdit="false" canDelete="false" canArchive="false" edit-icon="false" editable="false" groupBy="product">
+		<field name="product" />
+		<field name="description" />
+		<field name="unitPriceUntaxed" />
+		<field name="quantity" aggregate="sum"/>
+		<field name="taxRate" />
+		<field name="exTaxTotal" />
+		<field name="saleOrder" />
+		<field name="saleOrder.statusSelect"/>
+		<field name="saleOrder.customer" />
+		<field name="product.productCategory" />
+	</grid>
+	
+	<form model="com.axelor.sale.db.SaleOrderLine" title="Sale order line" name="sale-order-line-form">
+		<panel name="saleOrderLinePanel" title="mainPanel" >
+			<help showIf="product == null">PLease fill the product first</help>
+			<field name="product" domain="self.unitPriceUntaxed>'0'"/>
+			<field name="description" readonlyIf="product == null"/>
+			<field name="unitPriceUntaxed" readonlyIf="product == null"/>	
+			
+			<field name="quantity"/>
+			<field name="taxRate" />
+			<field name="exTaxTotal" readonly="true"/>
+		</panel>
+	</form>
+	
+	<form model="com.axelor.sale.db.SaleOrderLine" title="Sale order line" name="sale-order-line-form-from-menu" canNew="false" canEdit="false" canDelete="false" canArchive="false" canCopy="false" editable="false" width="large">
+		<panel name="saleOrderLinePanel" title="mainPanel" readonly="true">
+			<field name="product" />
+			<field name="description" />
+			<field name="unitPriceUntaxed" />
+			<field name="quantity" />	 
+			<field name="taxRate" />
+			<field name="exTaxTotal" />
+		</panel>
+		<panel sidebar="true" readonly="true">
+			<field name="saleOrder" />
+			<field name="saleOrder.customer" /> 
+			<field name="product.productCategory" /> 
+		</panel>
+	</form>
+	
+</object-views>
