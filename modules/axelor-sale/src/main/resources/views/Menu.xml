@@ -5,7 +5,7 @@
   https://axelor.com/xml/ns/object-views/object-views_6.0.xsd">
 
 	<menuitem title="Sale" name="sale-root" icon="fa-line-chart"
-		icon-background="yellow" />
+		icon-background="yellow" order="2"/>
 
 	<menuitem title="All sale orders"
 		name="sale-root-all-sale-orders" 

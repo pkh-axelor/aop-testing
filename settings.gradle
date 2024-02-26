@@ -39,4 +39,5 @@ rootProject.name = 'axelor-demo'
 // Include modules
 include "modules:axelor-contact"
 include "modules:axelor-sale"
+include "modules:axelor-invoice"
 

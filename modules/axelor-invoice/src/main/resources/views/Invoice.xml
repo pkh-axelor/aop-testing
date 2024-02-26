@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  	https://axelor.com/xml/ns/object-views/object-views_6.0.xsd">
+  	
+  	<grid model="com.axelor.invoice.db.Invoice" title="Invoices" name="invoice-grid">
+  		<field name="invoiceSeq" />
+  		<field name="invoiceDateT" />
+  		<field name="exTaxTotal" />
+  		<field name="inTaxTotal" />
+  		<field name="statusSelect" />
+  		<field name="customer" />
+  	</grid>
+  	
+  	<form model="com.axelor.invoice.db.Invoice" title="Invoices" name="invoice-form" width="large"  onNew="action-invoice-method-invoice-date" onSave="action-invoice-total-price">
+  		<panel>
+  			<field name="statusSelect" widget="navSelect" />
+  			<spacer/>
+  			<field name="invoiceSeq" />	
+  			<field name="customer" readonlyIf="invoiceLineList != null"/>
+  		</panel>
+ 
+  		<panel-related field="invoiceLineList" title="Invoices" readonlyIf="!customer|| statusSelect == 1" grid-view="invoice-line-grid"  form-view="invoice-line-form-from-menu"/>
+  		
+  		<panel sidebar="true">
+  			<button onClick="action-invoice-check-invoice-line-list" name="validate" title="Validate"  showIf="statusSelect == 0" />
+  			<button onClick="action-invoice-ventilate-button" name="ventilate" title="Ventilate" showIf="statusSelect == 1"/>
+  			<button onClick="action-invoice-group-cancel-button" name="cancelOrder" title="Cancel order" css="btn-danger" hideIf="statusSelect == 3"/>
+  		</panel>
+  		
+  		<panel title="Dates" sidebar="true" canCollapse="true" readonly="true">
+  			<field name="invoiceDateT" /> 
+  		</panel>
+  		
+  		<panel title="Prices" sidebar="true" canCollapse="true" readonly="true">
+  			<field name="exTaxTotal" />
+  			<field name="inTaxTotal" />
+  		</panel>
+  		
+  	</form>
+  	
+  	<action-group name="action-invoice-group-cancel-button">
+  		<action name="action-invoice-cancel-validate-message"/>
+  		<action name="action-invoice-cancel-button"/>
+  	</action-group>
+  	
+	<action-method name="action-invoice-method-invoice-date">
+		<call class="com.axelor.invoice.web.InvoiceController" method="setCurrentDate"/>
+	</action-method>
+
+	<action-method name="action-invoice-total-price">
+		<call class="com.axelor.invoice.web.InvoiceController" method="setTaxTotal"/>  
+	</action-method>
+	
+	<action-method name="action-invoice-check-invoice-line-list">
+		<call class="com.axelor.invoice.web.InvoiceController" method="validateButton"/>
+	</action-method>
+	
+	<action-method name="action-invoice-ventilate-button">
+		<call class="com.axelor.invoice.web.InvoiceController" method="ventilateButton"/>
+	</action-method>
+  		
+  	<action-method name="action-invoice-cancel-validate-message">
+  		<call class="com.axelor.invoice.web.InvoiceController" method="validateCancelButton"/>
+  	</action-method>
+  		
+	<action-method name="action-invoice-cancel-button">
+		<call class="com.axelor.invoice.web.InvoiceController" method="cancelButton"/>
+	</action-method>
+  		
+</object-views>

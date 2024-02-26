@@ -5,7 +5,7 @@
   	https://axelor.com/xml/ns/object-views/object-views_6.0.xsd">
 
 	<menuitem title="Contact" name="contact-root" icon="fa-user"
-		icon-background="#05a49c" />
+		icon-background="#05a49c" order="1"/>
 
 	<menuitem title="Contacts" 
 		name="contact-root-contacts"

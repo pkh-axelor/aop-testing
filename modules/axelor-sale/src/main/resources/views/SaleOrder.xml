@@ -31,7 +31,7 @@
 		<field name="customer" />
 	</grid>
 
-	<form model="com.axelor.sale.db.SaleOrder" 
+	<form model="com.axelor.sale.db.SaleOrder"  
 		title="Sale order"
 		name="sale-order-form" 
 		width="large" 
@@ -44,8 +44,8 @@
 			<panel-related field="saleOrderLineList" colSpan="12" grid-view="sale-order-line-grid" form-view="sale-order-line-form" readonlyIf="statusSelect == 'CONFIRMED' || customer==null"/>
 		</panel>
 		<panel name="confirmOrder" sidebar="true" hideIf="statusSelect == 'CANCELLED'">
-			<button onClick="action-finalize-quotation, action-finalize-quotation-save" name="finalizeQuotation" title="Finalize quotation" showIf="statusSelect == 'DRAFT'" />
-			<button onClick="action-confirm-quotation, action-confirmation-quotation-save" name="confirmOrder" title="Confirm order" showIf="statusSelect == 'QUOTATION'" />
+			<button onClick="action-sale-order-finalize-quotation" name="finalizeQuotation" title="Finalize quotation" showIf="statusSelect == 'DRAFT'" />
+			<button onClick="action-sale-order-confirm-order" name="confirmOrder" title="Confirm order" showIf="statusSelect == 'QUOTATION'" />
 			<button onClick="action-cancel-order-check" name="cancelOrder" css="btn-danger" title="Cancel order" prompt="Cancelling the order is definitive! Do you want to continue?"/>
 		</panel>
 		<panel name="dates" title="Dates" sidebar="true"
@@ -53,11 +53,20 @@
 			<field name="quotationDateT" />
 			<field name="confirmationDateT" />
 		</panel>
-		<panel title="Prices" sidebar="true" collapseIf="true"
-			readonly="true">
+		<panel title="Prices" sidebar="true" collapseIf="true" readonly="true">
 			<field name="inTaxTotal" />
 		</panel>
 	</form>
+	
+	<action-group name="action-sale-order-finalize-quotation" model="com.axelor.sale.db.SaleOrder">
+		<action name="action-finalize-quotation"/>
+		<action name="action-finalize-quotation-save"/>
+	</action-group>
+	
+	<action-group name="action-sale-order-confirm-order">
+		<action name="action-confirm-quotation"/>
+		<action name="action-confirmation-quotation-save"/>
+	</action-group>
 	
 	<action-record name="action-new-draft" model="com.axelor.sale.db.SaleOrder">
 		<field name="statusSelect" expr="draft"/>
@@ -83,12 +92,6 @@
 		<error message="There is a detail line with 0 total price. Please correct it." if="eval: saleOrderLineList.any{it->it.exTaxTotal==0}"/>
 	</action-validate>
 	
-	<action-record name="action-confirmation-quotation-save" model="com.axelor.sale.db.SaleOrder">
-		<field name="inTaxTotal" expr="eval: saleOrderLineList.collect{it->it.exTaxTotal * it.taxRate + it.exTaxTotal}.sum()"/>
-		<field name="confirmationDateT" expr="eval: __time__"/>
-		<field name="statusSelect" expr="confirmed"/>
-	</action-record>
-	
 	<action-record name="action-cancel-order-check" model="com.axelor.sale.db.SaleOrder">
 		<field name="inTaxTotal" expr="eval: saleOrderLineList.collect{it-> it.inTaxTotal}"/>
 		<field name="statusSelect" expr="cancelled"/>
@@ -101,5 +104,4 @@
 	<action-export name="action-record-export" model="com.axelor.sale.db.SaleOrder" output="SaleOrderLine.xml" download="true">
 		<export name="SaleOrderExport-${__datetime__.toString().substring(0,19)}.xml" template="data-export/sale-order-export.txt" engine="groovy"/>
 	</action-export>
-		
-</object-views> 
+</object-views>
