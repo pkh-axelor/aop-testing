@@ -13,7 +13,7 @@
   		<field name="isSubjectToTaxes" />
   		<field name="address" />
   		<field name="archived" />
-  		<button onClick="action-customer-sale-order-line" name="saleOrderLineList" title="customer-sale-order" icon="fa-print"/>
+  		<button onClick="action-customer-view-sale-order-line" name="saleOrderLineList" title="customer-sale-order" icon="fa-print"/>
   	</grid>
   	
   	<form model="com.axelor.contact.db.Contact" title="Contact" name="contact-form" width="large">
@@ -25,7 +25,7 @@
   				<field name="firstName"/>
   				<field name="lastName" />
   				<field name="title" />
-  				<field name="birthDate" onChange="action-customer-birth-date-condition"/>
+  				<field name="birthDate" onChange="action-customer-condition-check-birth-date"/>
   			</panel>
   		</panel>
   		
@@ -72,7 +72,7 @@
   	</cards>
   	
 	  	
-  	<action-view name="action-customer-sale-order-line" title="customer-sale-order" model="com.axelor.sale.db.SaleOrderLine">
+  	<action-view name="action-customer-view-sale-order-line" title="customer-sale-order" model="com.axelor.sale.db.SaleOrderLine">
         <view type="grid" name="sale-order-line-grid-from-menu" />
   		<view-param name="popup" value="true"/>
   		<view-param name="limit" value="20"/>
@@ -80,7 +80,7 @@
   		<context name="cusSale" expr="eval:__self__"/>
   	</action-view> 
   	
-  	<action-condition name="action-customer-birth-date-condition">
+  	<action-condition name="action-customer-condition-check-birth-date">
   		<check field="birthDate" if="birthDate &lt; LocalDate.of(1930, 1, 1)" error="should be &gt; 1930" />
   	</action-condition>
   	
